@@ -43,11 +43,12 @@ export default function Register() {
 
             // 2. Insert profile row into custom `users` table (adjust table/columns if different)
             // Assumes you created a table `users` with columns: id (uuid PK), first_name, last_name, email, created_at
-            const { error: insertError } = await supabase.from('users').insert({
+            const { error: insertError } = await supabase.from('users').upsert({
+                id: user.id,
                 fname,
                 lname,
-                email,
-                password,
+            }, {
+                onConflict: 'id'
             });
             if (insertError) throw insertError;
 
