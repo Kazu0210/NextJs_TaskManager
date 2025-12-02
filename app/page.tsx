@@ -28,7 +28,7 @@ export default function Home() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
+      const { data, error } = await supabase.auth.getSession();
 
       if (error) {
         console.error("Auth error:", error.message);
@@ -36,18 +36,20 @@ export default function Home() {
         return;
       }
 
-      setUser(data.user);
+      const session = data.session;
 
-      if (data.user) {
-        console.log("User is already logged in");
-      } else {
+      if (!session) {
         console.log("No user logged in");
+        setUser(null);
+        return;
       }
+
+      console.log("User is already logged in");
+      setUser(session.user);
     };
 
     checkUser();
   }, []);
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
