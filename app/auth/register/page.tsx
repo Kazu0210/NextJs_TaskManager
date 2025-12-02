@@ -86,51 +86,53 @@ export default function Register() {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label htmlFor="fname" className="block text-sm font-semibold text-gray-700">First Name</label>
+                                    <label htmlFor="fname" className="block text-sm font-semibold text-gray-900">First Name</label>
                                     <input
                                         id="fname"
                                         type="text"
+                                        placeholder="Enter your first name"
                                         value={fname}
                                         onChange={(e) => setFname(e.target.value)}
                                         required
-                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 placeholder:text-gray-600 text-gray-900"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label htmlFor="lname" className="block text-sm font-semibold text-gray-700">Last Name</label>
+                                    <label htmlFor="lname" className="block text-sm font-semibold text-gray-900">Last Name</label>
                                     <input
                                         id="lname"
                                         type="text"
+                                        placeholder="Enter your last name"
                                         value={lname}
                                         onChange={(e) => setLname(e.target.value)}
                                         required
-                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 placeholder:text-gray-600 text-gray-900"
                                     />
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email Address</label>
+                                <label htmlFor="email" className="block text-sm font-semibold text-gray-900">Email Address</label>
                                 <input
                                     id="email"
                                     type="email"
-                                    placeholder="you@example.com"
+                                    placeholder="Enter your email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 placeholder:text-gray-600 text-gray-900"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label htmlFor="password" className="block text-sm font-semibold text-gray-700">Password</label>
+                                <label htmlFor="password" className="block text-sm font-semibold text-gray-900">Password</label>
                                 <input
                                     id="password"
                                     type="password"
-                                    placeholder="********"
+                                    placeholder="Enter your password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                     minLength={6}
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 placeholder:text-gray-600 text-gray-900"
                                 />
                             </div>
 
@@ -153,24 +155,9 @@ export default function Register() {
                                 {loading ? 'Creating...' : 'Register'}
                             </button>
                         </form>
-                        <div className="mt-6 text-center text-gray-600 text-sm">
+                        <div className="mt-6 text-center text-gray-800 text-sm">
                             Already have an account?{' '}
                             <button onClick={goLogin} className="text-blue-600 hover:text-blue-700 font-semibold">Login</button>
-                        </div>
-                    </div>
-
-                    <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-                        <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow">
-                            <div className="text-2xl mb-1">🔐</div>
-                            <p className="text-xs text-gray-600 font-medium">Encrypted</p>
-                        </div>
-                        <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow">
-                            <div className="text-2xl mb-1">⚡</div>
-                            <p className="text-xs text-gray-600 font-medium">Fast</p>
-                        </div>
-                        <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow">
-                            <div className="text-2xl mb-1">🛡️</div>
-                            <p className="text-xs text-gray-600 font-medium">Protected</p>
                         </div>
                     </div>
                 </div>
@@ -178,7 +165,7 @@ export default function Register() {
 
             {/* Footer */}
             <footer className="w-full py-6 text-center bg-white/50 backdrop-blur-sm border-t border-gray-200">
-                <p className="text-gray-600 text-sm">&copy; 2023 Task Manager. All rights reserved.</p>
+                <p className="text-gray-800 text-sm">&copy; 2023 Task Manager. All rights reserved.</p>
             </footer>
         </div>
     );

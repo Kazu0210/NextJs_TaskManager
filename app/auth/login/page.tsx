@@ -105,7 +105,7 @@ export default function Login() {
                             <div className="flex items-center justify-between text-sm">
                                 <label className="flex items-center space-x-2 cursor-pointer">
                                     <input type="checkbox" className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-                                    <span className="text-gray-600">Remember me</span>
+                                    <span className="text-gray-800">Remember me</span>
                                 </label>
                                 <a href="#" className="text-blue-600 hover:text-blue-700 font-semibold">
                                     Forgot password?
@@ -122,7 +122,7 @@ export default function Login() {
                         </form>
 
                         <div className="mt-6 text-center">
-                            <p className="text-gray-600">
+                            <p className="text-gray-800">
                                 Don't have an account?{' '}
                                 <a href="/auth/register" className="text-blue-600 hover:text-blue-700 font-semibold">
                                     Register here
@@ -135,7 +135,7 @@ export default function Login() {
 
             {/* Footer */}
             <footer className="w-full py-6 text-center bg-white/50 backdrop-blur-sm border-t border-gray-200">
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-800 text-sm">
                     &copy; 2023 Task Manager. All rights reserved.
                 </p>
             </footer>
