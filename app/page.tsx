@@ -28,16 +28,26 @@ export default function Home() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data } = await supabase.auth.getUser();
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error) {
+        console.error("Auth error:", error.message);
+        setUser(null);
+        return;
+      }
+
       setUser(data.user);
+
       if (data.user) {
-        console.log('User is already logged in');
+        console.log("User is already logged in");
       } else {
-        console.log('No user logged in');
+        console.log("No user logged in");
       }
     };
+
     checkUser();
   }, []);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
