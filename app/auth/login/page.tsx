@@ -1,16 +1,41 @@
 'use client';
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Login form submitted');
-        console.log(`Email: ${email}, Password: ${password}`);
+        setError("");
+        setLoading(true);
+
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+
+            if (error) {
+                setError(error.message);
+                return;
+            }
+
+            if (data.user) {
+                // Successfully logged in
+                router.push('/task');
+            }
+        } catch (err) {
+            setError('An unexpected error occurred');
+            console.error('Login error:', err);
+        } finally {
+            setLoading(false);
+        }
     }
 
     const goBack = () => {
@@ -38,6 +63,12 @@ export default function Login() {
                             Welcome Back
                         </h1>
                         
+                        {error && (
+                            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+                                {error}
+                            </div>
+                        )}
+                        
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-2">
                                 <label htmlFor="email" className="block text-sm font-semibold text-gray-900">
@@ -50,7 +81,8 @@ export default function Login() {
                                     value={email} 
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900"
+                                    disabled={loading}
+                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 disabled:bg-gray-100 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -65,7 +97,8 @@ export default function Login() {
                                     value={password} 
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900"
+                                    disabled={loading}
+                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 disabled:bg-gray-100 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -81,9 +114,10 @@ export default function Login() {
 
                             <button 
                                 type="submit" 
-                                className="cursor-pointer w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                                disabled={loading}
+                                className="cursor-pointer w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                             >
-                                LOGIN
+                                {loading ? 'LOGGING IN...' : 'LOGIN'}
                             </button>
                         </form>
 
