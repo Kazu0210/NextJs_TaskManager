@@ -1,18 +1,32 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function Home() {
+  const router = useRouter();
+
+  const login = () => {
+    console.log('Login button clicked');
+  }
+
+  const register = () => {
+    console.log('Register button clicked');
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
       {/* Header with auth buttons */}
       <header className="w-full p-6 flex justify-end gap-4">
-        <button className="px-6 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow-md">
+        <button onClick={login} className="cursor-pointer px-6 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow-md">
           LOGIN
         </button>
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg">
+        <button onClick={register} className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg">
           REGISTER
         </button>
       </header>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-16">
+      <main className="flex-1 flex flex-col items-center justify-center px-4">
         <div className="max-w-3xl text-center space-y-6">
           <h1 className="text-6xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Task Manager
