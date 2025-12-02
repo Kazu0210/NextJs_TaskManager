@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
 
   const login = () => {
     router.push('/auth/login');
