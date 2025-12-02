@@ -7,6 +7,7 @@ export default function Home() {
 
   const login = () => {
     console.log('Login button clicked');
+    router.push('/auth/login');
   }
 
   const register = () => {
