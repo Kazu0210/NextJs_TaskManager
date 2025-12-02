@@ -12,6 +12,7 @@ export default function Home() {
 
   const register = () => {
     console.log('Register button clicked');
+    router.push('/auth/register');
   }
 
   return (
