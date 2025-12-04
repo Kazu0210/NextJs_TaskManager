@@ -31,6 +31,9 @@ export default function Page() {
     }, [router]);
 
     const logout = async () => {
+        const confirmed = window.confirm('Are you sure you want to logout?');
+        if (!confirmed) return;
+        
         const { error } = await supabase.auth.signOut();
         if (!error) {
             setUser(null);
