@@ -16,6 +16,7 @@ export default function Page() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         async function checkUser() {
@@ -44,7 +45,7 @@ export default function Page() {
     };
 
     const clicked = () => {
-        console.log('new task button clicked');
+        setShowModal(true);
     }
 
     if (loading) {
@@ -62,12 +63,21 @@ export default function Page() {
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     Task Manager
                 </h1>
-                <button 
-                    onClick={logout} 
-                    className="cursor-pointer px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg"
-                >
-                    LOGOUT
-                </button>
+                <div className="flex gap-4">
+                    <button 
+                        onClick={logout} 
+                        className="cursor-pointer px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                    >
+                        LOGOUT
+                    </button>
+
+                    <button
+                        onClick={clicked}
+                        className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                    >
+                        NEW TASK
+                    </button>
+                </div>
             </header>
 
             {/* Main content */}
@@ -97,13 +107,6 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-
-                <button
-                    onClick={clicked}
-                    className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
-                >
-                    NEW TASK
-                </button>
             </main>
 
             {/* Footer */}
@@ -112,6 +115,45 @@ export default function Page() {
                     &copy; 2023 Task Manager. All rights reserved.
                 </p>
             </footer>
+
+            {/* Modal */}
+            {showModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-6">Create New Task</h3>
+                        
+                        <form className="space-y-4">
+                            <div>
+                                <label htmlFor="taskTitle" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Task Title
+                                </label>
+                                <input
+                                    type="text"
+                                    id="taskTitle"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                                    placeholder="Enter task title..."
+                                />
+                            </div>
+                            
+                            <div className="flex gap-3 pt-4">
+                                <button
+                                    type="submit"
+                                    className="flex-1 px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                                >
+                                    Create
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowModal(false)}
+                                    className="flex-1 px-6 py-2 bg-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-400 transition-all duration-200 shadow-md hover:shadow-lg"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
