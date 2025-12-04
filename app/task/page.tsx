@@ -40,6 +40,10 @@ export default function Page() {
         }
     };
 
+    const clicked = () => {
+        console.log('new task button clicked');
+    }
+
     if (loading) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
@@ -90,6 +94,13 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
+
+                <button
+                    onClick={clicked}
+                    className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                >
+                    NEW TASK
+                </button>
             </main>
 
             {/* Footer */}
